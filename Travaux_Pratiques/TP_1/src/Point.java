@@ -20,7 +20,7 @@ public record Point(int x, int y) {
         System.out.println("x="+ x +", y="+ y);
 		Point p = new Point(x, y);
 		System.out.println(p.toString());
-        System.out.println("dist = " + p.distance());
+        System.out.println("dist = " + p.distance(0, 0));
     } 
 
     /* Parametre
@@ -28,9 +28,9 @@ public record Point(int x, int y) {
     *  y : int
     *  Retour float
     */
-    public float distance() {  
+    public float distance(int x, int y) {  
         float dist;
-        dist = (float)Math.sqrt((x() - 0) * (x() - 0)  + (y() - 0) * (y() - 0));
+        dist = (float)Math.sqrt((x() - x) * (x() - x)  + (y() - y) * (y() - y));
         return dist;
     }
 };
