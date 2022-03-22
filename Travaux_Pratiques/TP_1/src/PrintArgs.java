@@ -9,7 +9,7 @@ public class PrintArgs {
 
         if(len == 0) {
             System.err.println("Usage: java PrintArgs <arg1> <arg2> ....");
-            System.exit(0);
+            return;
         }
 
         /**
