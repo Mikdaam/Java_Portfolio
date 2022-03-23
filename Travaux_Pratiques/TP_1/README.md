@@ -162,7 +162,7 @@
    }
    ```
 
-# Exercice 4 - Record et conversion de String en entier
+# Exercice 4 - Record et conversion of String to interger
 
 1. Create a Point record with two components, x and y.
    
@@ -207,18 +207,17 @@
    
    ```java
    /**
-   * parameter int x
-   * parameter int y
+   * parameter Point point
    * return float
    */
-   public floa distance(int x, int y) {  
+   public double distance(Point point) {  
        float dist;
-       dist = (float)Math.sqrt((this.x - x) * (this.x - x)  + (this.y - y) * (this.y - y));
+       dist = Math.sqrt((this.x - point.x()) * (this.x - point.x())  + (this.y - point.y()) * (this.y - point.y()));
        return dist;
    }
    ```
 
-# Exercice 5 - De C vers Java
+# Exercice 5 - From C to Java
 
 1. Compiles the C program with the command `gcc -o pascal pascal.c`. When we run the program with `time` command, we get the following output:
    
@@ -243,6 +242,5 @@
    ```
 
 ## Explanation
-
 We can notice that the execution time of both program is pratically the same.
 This is due to the JIT(Just In Time) 
