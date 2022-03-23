@@ -24,7 +24,7 @@ public class Regex {
         
         // 3. 
         for(String argument: args) {
-            if(Pattern.matches("\\D+\\d+$", argument)) {
+            if(Pattern.matches("\\D*\\d+$", argument)) {
                 System.out.print(argument + " ");
             }
         }
