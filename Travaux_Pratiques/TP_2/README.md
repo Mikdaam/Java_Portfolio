@@ -74,7 +74,7 @@
             }
             var output = "";
             for(String arg: args) {
-                output + args + " Stop. ";
+                output += arg + " Stop. ";
             }
             System.out.println(output);
         }
@@ -84,7 +84,7 @@
 2. The `StringBuilder` object allow us to build a string with better performance.
     - The `append(String)` method return a `StringBuilder` object to allow us the chaining of method call like :
     ```java
-        var myString = new StringBuilder().append("Hello).append("World);
+        var myString = new StringBuilder().append("Hello").append("World").toSting();
     ``` 
 
 3. Rewrite the previous code using `StringBuilder`
@@ -98,7 +98,7 @@
             }
             var output = new StringBuilder();
             for(String arg: args) {
-                output.append(args)
+                output.append(arg)
                     .append(" Stop. ");
             }
             System.out.println(output);
@@ -108,15 +108,17 @@
     > Using the `Sringbuilder` is better than the concatenation beacause the `+` operator allocate the momory for each concatenation.  
 
 4. We can use `' '` instead of `" "` because if an operand of `+` operateur is a string, the result of the operation is a string.
-    - We can deduce that the JVM replace the `+` operator with the method `append()` of `StringBuilder` .
+    - We can deduce that the JVM replace the `+` with a built-in method which allocate once the memory if the operation is on one line.
 
-5. We can deduce that the JVM replace the `+` operator with the method `append()` of `StringBuilder` .
+5. We can deduce that the JVM `+` operator allocate memory each time on the loop.
     - We can use a `StringBuilder` in case of a loop and the `+` operator incase of inline code
     - The usage of `+` operator in the `append()` method is bad beacuse the `+` operator allocate a memory each time there is an operand
 
 
 ## Exercice 3 - Regex pattern
-1. The `Pattern` classe 
+1. The `Pattern` class and it method `compile()` allow us to create a regex pattern from a string.
+   The resulting pattern can be used to match a string against the regular expression. 
+   - The `Macther` class is used to find the match of the pattern in a string.
 
 2. Write a program who match the command line arguments
     ```java
@@ -167,13 +169,32 @@
     public class Regex {
         public static void main(String[] args) {
             ...
+            System.out.println("IP? : " + args[0]);
+            System.out.println("====================");
+            var ip_parts = splitIPAdress(args[0]);
+            for (int i = 0; i < ip_parts.length; i++) {
+                System.out.println("Part "+ i +" => " + (ip_parts[i] & 0xFF));
+            }
         }
 
         public static byte[] splitIPAdress(String ip) {
-            Boolean isIPv4 = Pattern.matches("((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$", ip);
-            if(isIPv4) {
-                
+            var pattern = Pattern.compile("((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$))");
+            var matcher = pattern.matcher(ip);
+            boolean isIP = Pattern.matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)(\\.(?!$)|$)){4}$", ip);
+            var result = new byte[4];
+            if(!isIP) {
+                throw new IllegalArgumentException("Not a valid IPv4 address");
             }
+
+            int i = 0;
+            while (matcher.find()) {
+                var part = i < 3 
+                    ? Integer.parseInt(matcher.group().substring(0, matcher.group().length() - 1))
+                    : Integer.parseInt(matcher.group());
+                result[i] = (byte) part;
+                i++;
+            }
+            return result;
         }
     }
     ```
