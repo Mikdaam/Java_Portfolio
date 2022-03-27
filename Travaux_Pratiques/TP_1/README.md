@@ -1,10 +1,10 @@
-# Debriefing
+# Pratical Exercices N° 1 - Debriefing
 
 | Nom     | Prenom  |
 |:-------:|:-------:|
 | BADAROU | Mikdaam |
 
-# Exercice 1 - Hello Groland
+## Exercice 1 - Hello Groland
 
 1. Write the following program in `HelloGroland.java` file
    
@@ -24,7 +24,7 @@
 3. Run the program using the following command `java HelloGroland`.
     Done ✅
 
-# Exercice 2 - Display the command line arguments
+## Exercice 2 - Display the command line arguments
 
 1. Display the first argument of the command line
    
@@ -80,7 +80,7 @@
    }
    ```
 
-# Exercice 3 - Simple Calculator
+## Exercice 3 - Simple Calculator
 
 1. Copy the previous program and complete it.
    
@@ -162,7 +162,7 @@
    }
    ```
 
-# Exercice 4 - Record et conversion of String to interger
+## Exercice 4 - Record et conversion of String to interger
 
 1. Create a Point record with two components, x and y.
    
@@ -217,7 +217,7 @@
    }
    ```
 
-# Exercice 5 - From C to Java
+## Exercice 5 - From C to Java
 
 1. Compiles the C program with the command `gcc -o pascal pascal.c`. When we run the program with `time` command, we get the following output:
    
@@ -241,7 +241,7 @@
    sys 0m0.029s
    ```
 
-## Explanation
+### Explanation
 
-We can notice that the execution time of both program is pratically the same.
-This is due to the JIT(Just In Time) 
+> We can notice that the execution time of both program is pratically the same.
+> This is due to the JIT(Just In Time) 
