@@ -48,7 +48,7 @@
     > The comparison return `true` because the JVM create an object `"toto"` in the heap and assign the reference of this object to `s6` and `s7` variable
     So both variables contains the reference of `"toto"` object.
 
-5. The `String` has to be immutable to ensure the integrity of the contains of the string.
+5. The `String` has to be immutable to ensure the integrity of the contains of the string. In addition, the `String` object is used in other context of the program.
 
 6. The following code
     ```java
