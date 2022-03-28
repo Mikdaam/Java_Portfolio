@@ -184,8 +184,9 @@
                return;
            }
    
+           Pattern number = Pattern.compile("\\D*\\d+$");
            for(String argument: args) {
-               if(Pattern.matches("\\D*\\d+$", argument)) {
+               if(number.matcher(argument).matches()) {
                    System.out.print(argument + " ");
                }
            }
