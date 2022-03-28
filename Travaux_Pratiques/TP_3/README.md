@@ -62,8 +62,8 @@
     }
     ```
 
-7. How does the compiler know which constructor call ?
-    I don'k yet, i had to ask the teacher
+7. How does the compiler know what constructor call ?
+    > The compiler looks the signature of each constructor to decide what constructor call.
 
 8. Change the `title` component with `withTitle` method.
     The following code 
@@ -158,7 +158,7 @@
     ```
 
 6. What the `@Override` annotation is used for ?
-    Don't know yet!!!
+    > The `@Override` annotation ensure that the signature of a method is correct. It to avoid miswriting the name of a basic method
 
 ## Exercice 3
 Consider the following code :
