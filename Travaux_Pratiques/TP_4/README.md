@@ -1,27 +1,9 @@
-# Pratical Exercices N° 3 - Debriefing
+# Debriefing
 
-| Nom     | Prenom  |
-|:-------:|:-------:|
-| BADAROU | Mikdaam |
+## Exercice 1
+1. At home
 
-## Exercice 1 - Book
-
-1. Declare a record `Book` with `title` and `author` components.
-   
-   ```java
-   public record Book(String title, String author) {}
-   ```
-
-2. Adding main method to the `Book` record
-   
-   ```java
-    public record Book(String title, String author) {
-        public static void main(String[] args) {
-            var book = new Book("Da Vinci Code", "Dan Brown");
-            System.out.println(book.title + ' ' + book.author);
-        }
-    }
-   ```
+2. At home
 
 3. Creates a class `Main` and move the `main()` method in it.
     ```java
@@ -110,7 +92,7 @@
     }
     ```
 
-## Exercice 2 - Liberty, Equality, toString
+## Exercice 2
 1. The above code 
     ```java
     var b1 = new Book("Da Java Code", "Duke Brown");
@@ -214,7 +196,7 @@ public class Book2 {
     }
     ```
 
-## Exercice 4 - Bubble Sort
+## Exercice 4
 1. Write a method named `swap()` which change the values of two cases of an array
     ```java
     public static void swap(int[] array, int index1, int index2) {

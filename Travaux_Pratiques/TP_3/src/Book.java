@@ -11,18 +11,11 @@ public record Book(String title, String author) {
     }
     // on ne peut pas modifier un champs final
     public Book withTitle(String title) {
-        return new Book(title, this.author);
+        return new Book(title, author);
     }
 
     public boolean isFromTheSameAuthor(Book other) {
-        return this.author.equals(other.author);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o instanceof Book book
-            && Objects.equals(title, book.title) 
-            && Objects.equals(author, book.author);
+        return author.equals(other.author);
     }
 
     @Override
