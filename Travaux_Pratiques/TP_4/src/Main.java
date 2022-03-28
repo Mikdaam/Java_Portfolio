@@ -1,25 +1,13 @@
 public class Main {
-	public Main(int foo) {
-		super();
-		this.foo = foo;
-	}
-
-	int foo;
 	public static void main(String[] args) {
-		System.out.println("Hello Eclipse");
-	}
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
-	
-	public int getFoo() {
-		return foo;
-	}
-	
-	public void setFoo(int foo) {
-		this.foo = foo;
+		var book = new Book("Da Vinci Code", "Dan Brown");
+		var library = new Library();
+		library.add(book);
+		library.add(new Book("The Da Vinci Code", "Toto"));
+		library.add(new Book("The Dark Code", "Titi"));
+		library.add(new Book("The White Code", "Tata"));
+		System.out.println(library.findByTitle("Da Vinci Code"));
+
+		System.out.println(library);
 	}
 }
