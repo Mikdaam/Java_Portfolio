@@ -1,12 +1,11 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class Library {
-	//private ArrayList<Book> books;
-	private Map<String, Book> books;
+	//private final ArrayList<Book> books;
+	private final LinkedHashMap<String, Book> books;
 	
 	// public Library() {
 	// 	books = new ArrayList<Book>();
@@ -27,7 +26,7 @@ public class Library {
 	// }
 
 	public Library() {
-		books = new LinkedHashMap<String, Book>();
+		books = new LinkedHashMap<>();
 	}
 
 	public void add(Book book) {
@@ -38,12 +37,26 @@ public class Library {
 	public Book findByTitle(String title) {
 		return books.get(title);
 	}
+	
+	public void removeAllBooksFromAuthor(String author) {
+		/*var iterator = books.values().iterator();
+		while (iterator.hasNext()) {
+			Book book = iterator.next();
+			if (book.author().equals(author)) {
+				iterator.remove();
+			}
+		}*/
+		
+		books.values().removeIf(book -> (book.author().equals(author)));
+	}
 
 	@Override
 	public String toString() {
 		var output = new StringBuilder();
-		for (Map.Entry<String, Book> entry : books.entrySet()) {
-			output.append(entry.getKey()).append("\n");
+		var seperator = "";
+		for (var book : books.values()) {
+			output.append(seperator).append(book.toString());
+			seperator = "\n";
 		}
 		return output.toString();
 	}
