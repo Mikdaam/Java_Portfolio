@@ -75,7 +75,7 @@ public class Library {
 	private final ArrayList<Book> books;
 	
 	public Library() {
-		books = new ArrayList<Book>();
+		books = new ArrayList<>();
 	}
 
 	public void add(Book book) {
