@@ -46,7 +46,7 @@ public class Library {
 				iterator.remove();
 			}
 		}*/
-		
+		Objects.requireNonNull(author, "author must not be null");
 		books.values().removeIf(book -> (book.author().equals(author)));
 	}
 
