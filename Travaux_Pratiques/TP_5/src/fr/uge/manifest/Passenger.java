@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Mick Cool
  *
  */
-public record Passenger(String destination) implements ContainerType {
+public record Passenger(String destination) implements Item {
 	public Passenger {
 		Objects.requireNonNull(destination, "destination must be not null");
 	}
@@ -27,10 +27,5 @@ public record Passenger(String destination) implements ContainerType {
 	@Override
 	public int onboardPrice() {
 		return 10;
-	}
-
-	@Override
-	public boolean isContainer() {
-		return false;
 	}
 }

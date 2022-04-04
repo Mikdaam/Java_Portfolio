@@ -58,5 +58,18 @@ public class TestFirst {
 	    manifest4.add(passenger2);
 	    manifest4.removeAllContainersFrom("Russia");
 	    System.out.println(manifest4);
+	    
+	    System.out.println("=================================");
+	    
+	    var container11 = new Container("Monaco", 100);
+	    var container12 = new Container("Luxembourg", 200);
+	    var container13 = new Container("Monaco", 300);
+	    var passenger3 = new Passenger("Paris");
+	    var manifest8 = new Manifest();
+	    manifest8.add(container11);
+	    manifest8.add(container12);
+	    manifest8.add(container13);
+	    manifest8.add(passenger3);
+	    System.out.println(manifest8.weightPerDestination());
 	}
 }

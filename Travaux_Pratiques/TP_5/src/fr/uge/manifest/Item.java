@@ -7,11 +7,16 @@ package fr.uge.manifest;
  * @author Mick Cool
  *
  */
-public interface ContainerType {
+public sealed interface Item permits Container, Passenger {
 	
 	int weight();
+	
 	String destination();
+	
 	int onboardPrice();
-	boolean isContainer();
+	
+	default boolean isContainer() {
+		return false;
+	}
 	
 }

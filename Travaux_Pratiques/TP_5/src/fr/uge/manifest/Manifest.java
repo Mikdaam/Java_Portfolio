@@ -4,6 +4,7 @@
 package fr.uge.manifest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -11,54 +12,69 @@ import java.util.Objects;
  *
  */
 public class Manifest {
-	private final ArrayList<ContainerType> container_list;
+	private final ArrayList<Item> containers;
 	
 	public Manifest() {
-		container_list = new ArrayList<>();
+		containers = new ArrayList<>();
 	}
 	
-	public void add(ContainerType container) {
+	public void add(Item container) {
 		Objects.requireNonNull(container, "container must not be null");
-		container_list.add(container);
+		containers.add(container);
 	}
 	
 	public int weight() {
-		var total_weight = 0;
-		for (var container : container_list) {
-			total_weight += container.weight();
+		var totalWeight = 0;
+		for (var container : containers) {
+			totalWeight += container.weight();
 		}
 		
-		return total_weight;
+		return totalWeight;
 	}
 	
 	public int price() {
-		var total_price = 0;
-		for (var container : container_list) {
-			total_price += container.onboardPrice();
+		var totalPrice = 0;
+		for (var container : containers) {
+			totalPrice += container.onboardPrice();
 		}
 		
-		return total_price;
+		return totalPrice;
 	}
 
 	public void removeAllContainersFrom(String destination) {
 		Objects.requireNonNull(destination, "destination must not be null");
 		
-		var iterator = container_list.iterator();
+		var iterator = containers.iterator();
 		while (iterator.hasNext()) {
-			var container = iterator.next();
-			if (container.destination().equals(destination) && container.isContainer()) {
+			var item = iterator.next();
+			if (item.destination().equals(destination) && item.isContainer()) {
 				iterator.remove();
 			}
 		}
 	}
 	
+	public HashMap<String, Integer> weightPerDestination() {
+		var weightSummary = new HashMap<String, Integer>();
+		for (var item : containers) {
+			if (item.isContainer()) {
+				var previousValue = weightSummary.getOrDefault(item.destination(), 0);
+				weightSummary.put(item.destination(), previousValue + item.weight());
+			}
+		}
+		
+		return weightSummary;
+	}
+	
 	@Override
 	public String toString() {
 		var output = new StringBuilder();
-		var new_line = "";
-		for (int i = 0; i < container_list.size(); i++) {
-			output.append(new_line).append(i + 1).append(".").append(container_list.get(i));
-			new_line = "\n";
+		var refactor = "";
+
+		var i = 1;
+		for (var item : containers) {
+			output.append(refactor).append(i).append(".").append(item);
+			refactor = "\n";
+			i++;
 		}
 		
 		return output.toString();
