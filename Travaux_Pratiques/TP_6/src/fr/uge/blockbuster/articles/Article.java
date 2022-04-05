@@ -1,5 +1,8 @@
 package fr.uge.blockbuster.articles;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -7,19 +10,15 @@ public sealed interface Article permits LaserDisc, VideoTape {
 	
 	static final String LASER_DISC = "LaserDisc";
 	static final String VIDEO_TAPE = "VideoTape";
+	static final byte VIDEO_TAPE_BINARY_CODE = 1;
+	static final byte LASER_DISC_BINARY_CODE = 2;
 	
 	String name();
 	
-	Duration duration();
-	
 	String toText();
 	
-	/**
-	 * Ce n'est pas probablement la bonne chose à faire
-	 * ? A demender au prof
-	 * @param line
-	 * @return
-	 */
+	void saveInBinary(DataOutputStream output) throws IOException;
+	
 	static Article fromText(String line) {
 		Objects.requireNonNull(line, "string can't be null");
 		var components = line.split(":");
@@ -30,8 +29,18 @@ public sealed interface Article permits LaserDisc, VideoTape {
 		}
 	}
 	
-	default boolean isVideoTape() {
-		return false;
-	};
+	static Article fromBinary(DataInputStream input) throws IOException {
+		Objects.requireNonNull(input, "input can't be null");
+		var articleType = input.readByte();
+		
+		if (articleType == VIDEO_TAPE_BINARY_CODE) {
+			var name = input.readUTF();
+			var duration = input.readLong();
+			return new VideoTape(name, Duration.ofSeconds(duration));
+		} else {
+			var name = input.readUTF();
+			return new LaserDisc(name);
+		}
+	}
 	
 }
