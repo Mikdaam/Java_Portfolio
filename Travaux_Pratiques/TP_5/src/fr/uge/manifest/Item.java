@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.uge.manifest;
 
 /**
