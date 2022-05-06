@@ -14,10 +14,10 @@ public record Sub(Expr leftExpr, Expr rightExpr) implements BinaryOp {
 	}
 
 	@Override
-	public StringBuilder stringify(StringBuilder buffer) {
-		return buffer.append("(").append(leftExpr.stringify(buffer))
-				.append("-")
-				.append(rightExpr.stringify(buffer))
+	public StringBuilder stringify() {
+		return new StringBuilder().append("(").append(leftExpr.stringify())
+				.append(" - ")
+				.append(rightExpr.stringify())
 				.append(")");
 	}
 }

@@ -8,7 +8,7 @@ public record Value(int value) implements Expr {
 	}
 
 	@Override
-	public StringBuilder stringify(StringBuilder buffer) {
-		return buffer.append(value);
+	public StringBuilder stringify() {
+		return new StringBuilder().append(value);
 	}
 }

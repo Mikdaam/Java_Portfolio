@@ -16,7 +16,6 @@ public class Main {
 		var input = new Scanner(System.in);
 		var mainExpr = Expr.parse(input);
 		
-		var buffer = new StringBuilder();
-		System.out.println(mainExpr.stringify(buffer).toString() + " = " + mainExpr.eval());
+		System.out.println(mainExpr.stringify().toString() + " = " + mainExpr.eval());
 	}
 }

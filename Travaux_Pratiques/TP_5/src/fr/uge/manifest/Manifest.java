@@ -60,7 +60,7 @@ public class Manifest {
 			}
 		}
 		
-		return Map.copyOf(weightSummary)
+		return Map.copyOf(weightSummary);
 	}
 	
 	@Override
