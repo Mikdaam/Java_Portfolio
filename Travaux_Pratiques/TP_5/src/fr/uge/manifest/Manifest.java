@@ -2,6 +2,7 @@ package fr.uge.manifest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -50,7 +51,7 @@ public class Manifest {
 		}
 	}
 	
-	public HashMap<String, Integer> weightPerDestination() {
+	public Map<String, Integer> weightPerDestination() {
 		var weightSummary = new HashMap<String, Integer>();
 		for (var item : containers) {
 			if (item.isContainer()) {
@@ -59,7 +60,7 @@ public class Manifest {
 			}
 		}
 		
-		return weightSummary;
+		return Map.copyOf(weightSummary)
 	}
 	
 	@Override

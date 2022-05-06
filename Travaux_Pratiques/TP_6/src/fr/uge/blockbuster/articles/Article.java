@@ -17,30 +17,41 @@ public sealed interface Article permits LaserDisc, VideoTape {
 	
 	String toText();
 	
-	void saveInBinary(DataOutputStream output) throws IOException;
-	
 	static Article fromText(String line) {
 		Objects.requireNonNull(line, "string can't be null");
 		var components = line.split(":");
-		if(components[0].equals(LASER_DISC)) {
-			return new LaserDisc(components[1]);
-		} else {
-			return new VideoTape(components[1], Duration.ofMinutes(Long.parseLong(components[2])));
+
+		return switch (components[0]) {
+		case LASER_DISC -> {
+			yield new LaserDisc(components[1]);			
 		}
+		case VIDEO_TAPE -> {
+			yield new VideoTape(components[1], Duration.ofMinutes(Long.parseLong(components[2])));
+		}
+		default -> 
+			throw new IllegalArgumentException("Unexpected article: " + components[0]);
+		};
 	}
+	
+	void saveInBinary(DataOutputStream output) throws IOException;
 	
 	static Article fromBinary(DataInputStream input) throws IOException {
 		Objects.requireNonNull(input, "input can't be null");
 		var articleType = input.readByte();
 		
-		if (articleType == VIDEO_TAPE_BINARY_CODE) {
+		return switch (articleType) {
+		case VIDEO_TAPE_BINARY_CODE -> {
 			var name = input.readUTF();
 			var duration = input.readLong();
-			return new VideoTape(name, Duration.ofSeconds(duration));
-		} else {
-			var name = input.readUTF();
-			return new LaserDisc(name);
+			yield new VideoTape(name, Duration.ofSeconds(duration));
 		}
+		case LASER_DISC_BINARY_CODE -> {
+			var name = input.readUTF();
+			yield new LaserDisc(name);
+		}
+		default ->
+			throw new IllegalArgumentException("Unexpected article: " + articleType);
+		};
 	}
 	
 }
