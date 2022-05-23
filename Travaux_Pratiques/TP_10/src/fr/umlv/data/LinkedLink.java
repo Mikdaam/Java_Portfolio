@@ -1,5 +1,6 @@
 package fr.umlv.data;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -8,10 +9,10 @@ public class LinkedLink<T> {
 	private Link<T> headList;
 	private int length;
 	
-	public LinkedLink() {
+	/*public LinkedLink() { Don't need this constructor. Is done by default by the constructor
 		headList = null;
 		length = 0;
-	}
+	}*/
 	
 	public void add(T value) {
 		Link<T> newLink = new Link<T>(value, headList);
@@ -19,24 +20,24 @@ public class LinkedLink<T> {
 		length++;
 	}
 	
-	public Link<T> get(int index) {
-		if (index < 0 || index  >= length) {
+	public T get(int index) {
+		/*if (index < 0 || index  >= length) {
 			throw new IllegalArgumentException("Index of element should be positive and less than the size of the list");
-		}
+		}*/
+		
+		Objects.checkIndex(index, length);
 		
 		Link<T> headPointer = headList;
-		
-		for (int current_index = 0; current_index < (length - 1 - index); current_index++) {
+		for (int current_index = 0; current_index < index; current_index++) {
 			headPointer = headPointer.next();
 		}
-		
-		return headPointer;
+		return headPointer.value();
 	}
 	
-	public void forEach(Consumer<Link<T>> consumer) {
+	public void forEach(Consumer<T> consumer) {
 		Link<T> pointer = headList;
 		while (pointer != null) {
-			consumer.accept(pointer);
+			consumer.accept(pointer.value());
 			pointer = pointer.next();
 		}
 	}
@@ -51,7 +52,7 @@ public class LinkedLink<T> {
 		var listString = new StringJoiner(" --> ");
 		
 		for (int i = 0; i < length; i++) {
-			listString.add(get(i).value()+"");
+			listString.add(get(i)+"");
 		}
 		
 		return listString.toString();
