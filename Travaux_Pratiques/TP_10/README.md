@@ -6,10 +6,10 @@
 
 1. Create a `Link` record.
    
-   - The visibility of the `Link` record should be `private`.
+   - The visibility of the `Link` record should be `default`.
      
      ```java
-     public record Link(int value, Link next) {
+     record Link(int value, Link next) {
         public static void main(String[] args) {
             Link firstLink = new Link(13, null); 
             Link second = new Link(144, firstLink);
@@ -26,11 +26,6 @@
    public class LinkedLink {
        private Link headList;
        private int length;
-   
-       public LinkedLink() {
-           headList = null;
-           length = 0;
-       }
    }
    ```
    
@@ -52,18 +47,14 @@
      ```java
      public class LinkedLink {
        ...
-       public Link get(int index) {
-           if (index < 0 || index  >= length) {
-               throw new IllegalArgumentException("Index of element should be positive and less than the size of the list");
-           }
+       public int get(int index) {
+           Objects.checkIndex(index, length);
      
-           Link headPointer = headList;
-     
-           for (int current_index = 0; current_index < (length - 1 - index); current_index++) {
+           Link<T> headPointer = headList;
+           for (int current_index = 0; current_index < index; current_index++) {
                headPointer = headPointer.next();
            }
-     
-           return headPointer;
+           return headPointer.value();
        }
      }
      ```
@@ -72,32 +63,32 @@
      
      ```java
      public class LinkedLink {
-       ...
-       public void forEach(Consumer<Link> consumer) {
-           Link current = headList;
-           while (current != null) {
-               consumer.accept(current);
-               current = current.next;
-           }
-       }
+        ...
+        public void forEach(IntConsumer consumer) {
+            Link current = headList;
+            while (current != null) {
+                consumer.accept(current.value());
+                current = current.next;
+            }
+        }
      }
      ```
-   
-   - Create `toString` method to print the list.
+     
+     - Create `toString` method to print the list.
      
      ```java
      public class LinkedLink {
-       ...
-       public String toString() {
-           /*Stream.iterate(null, null, null) TODO: Ask the professor about how to use iterate */
-           var listString = new StringJoiner(" --> ");
+        ...
+        public String toString() {
+            /*Stream.iterate(null, null, null) TODO: Ask the professor about how to use iterate */
+            var listString = new StringJoiner(" --> ");
      
-           for (int i = 0; i < length; i++) {
-               listString.add(get(i).value()+"");
-           }
+            for (int i = 0; i < length; i++) {
+                listString.add(get(i).value()+"");
+            }
      
-           return listString.toString();
-       }
+            return listString.toString();
+        }
      }
      ```
 
@@ -106,7 +97,7 @@
 1. Change `Link` record and `LinkedList` class for a generic usage based on `Object`.
    
    ```java
-   public record Link(Object value, Link next) {
+   record Link(Object value, Link next) {
        public static void main(String[] args) {
            Link firstLink = new Link(13, null); 
            Link second = new Link(144, firstLink);
@@ -140,7 +131,53 @@
 ### Exercice 3 - Generic Linked List
 
 1. The interest of using a generic type is to be able to use the same method for different types.
+
+2. Change `LinkedLink` to be generic
    
    ```java
+    public class LinkedLink<T> {
+        private Link<T> headList;
+        private int length;
    
+        public void add(T value) {
+            Link<T> newLink = new Link<T>(value, headList);
+            headList = newLink;
+            length++;
+        }
+   
+        public T get(int index) {            
+            Objects.checkIndex(index, length);
+   
+            Link<T> headPointer = headList;
+            for (int current_index = 0; current_index < index; current_index++) {
+                headPointer = headPointer.next();
+            }
+            return headPointer.value();
+        }
+   
+        public void forEach(Consumer<T> consumer) {
+            Link<T> pointer = headList;
+            while (pointer != null) {
+                consumer.accept(pointer.value());
+                pointer = pointer.next();
+            }
+        }
+   
+        /*public void removeIf(Predicate<T> predicate) {
+   
+        }*/
+   
+        @Override
+        public String toString() {
+            /*Stream.iterate(null, null, null) TODO: Ask the professor about how to use iterate */
+            var listString = new StringJoiner(" --> ");
+            for (int i = 0; i < length; i++) {
+                listString.add(get(i)+"");
+            }
+            return listString.toString();
+        }
+    }
    ```
+
+3. Change `Main` in consequence
+    Done 

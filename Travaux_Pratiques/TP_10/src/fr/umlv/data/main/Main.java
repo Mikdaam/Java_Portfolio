@@ -11,9 +11,9 @@ public class Main {
 		myList.add(4);
 		myList.add(5);
 		
-		System.out.println(myList.get(3).value());
+		System.out.println(myList.get(3));
 		
-		myList.forEach(e -> System.out.println(e.value()));
+		myList.forEach(e -> System.out.println(e));
 		
 		System.out.println(myList);
 		
@@ -21,6 +21,6 @@ public class Main {
 		var l = new LinkedLink<String>();
 	       l.add("hello");
 	       l.add("world");
-	       l.forEach( s -> System.out.println("string " + s + " length " + s.value().length()));
+	       l.forEach( s -> System.out.println("string " + s + " length " + s.length()));
 	}
 }
