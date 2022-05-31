@@ -42,6 +42,17 @@ public class LinkedLink<T> {
 		}
 	}
 	
+	/*private LinkedLink<T> removeIfLoop(Link<T> link, Predicate<T> predicate) {
+    if(link == null) {
+      return new LinkedList<>();
+    }
+    
+    var removedList = removeIfLoop(link.next(), predicate);
+    
+    if()
+    
+  }*/
+	
 	public void removeIf(Predicate<T> predicate) {
 		
 	}
