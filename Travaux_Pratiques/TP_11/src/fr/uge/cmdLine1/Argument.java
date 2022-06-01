@@ -2,7 +2,7 @@ package fr.uge.cmdLine1;
 
 import java.util.Objects;
 
-public class Argument {
+public sealed class Argument permits Option {
   final String text;
   
   public Argument(String text) {

@@ -7,10 +7,8 @@ public enum OptionInfo {
   
   public static Optional<OptionInfo> asOptionInfo(String optionText) {
     return switch (optionText) {
-      case "-v" -> Optional.ofNullable(VERBOSE);
-      case "--verbose" -> Optional.ofNullable(VERBOSE);
-      case "-a" -> Optional.ofNullable(ALL);
-      case "-all" -> Optional.ofNullable(ALL);
+      case "-v", "--verbose" -> Optional.of(VERBOSE);
+      case "-a", "-all" -> Optional.of(ALL);
       default -> Optional.empty();
     };
   }

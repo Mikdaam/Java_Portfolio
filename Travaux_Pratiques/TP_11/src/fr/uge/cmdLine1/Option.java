@@ -2,7 +2,7 @@ package fr.uge.cmdLine1;
 
 import java.util.Objects;
 
-public class Option extends Argument {
+public final class Option extends Argument {
   private final OptionInfo info;
   public Option(String text, OptionInfo info) {
     super(text);
